@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta http-equiv="Content-Security-Policy" content="default-src &#39;none&#39;; script-src &#39;self&#39;; style-src &#39;self&#39;; img-src &#39;self&#39; data: blob:; font-src &#39;self&#39;; connect-src &#39;self&#39;; media-src &#39;self&#39; blob:; worker-src &#39;self&#39; blob:; base-uri &#39;none&#39;; form-action &#39;none&#39;; object-src &#39;none&#39;">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Внутри часов</title>
+<meta name="description" content="Прокрутите страницу и нырните внутрь часов: шестерни, пружина, рубин, мини-игра и звук. Сайт сделан с ИИ.">
+<meta name="theme-color" content="#0b0806">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23e0a84a' stroke-width='3'/%3E%3Cpath d='M16 8v8l5 3' stroke='%23e0a84a' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <script type="module" crossorigin src="./assets/index-Bv5qLtps.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cx8hEFjG.css">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="topbar">
+  <span class="brand">Внутри часов</span>
+</header>
+
+<nav class="dots" aria-label="Остановки путешествия"></nav>
+
+<main id="story">
+  <section class="stop" data-stop="0" aria-labelledby="h0">
+    <div class="card">
+      <p class="kicker">Остановка 1 из 6 · Циферблат</p>
+      <h1 id="h0">Тик. Так. Заходите.</h1>
+      <p>Обычные часы. Но мы сейчас нырнём внутрь - прямо сквозь стекло. Просто листайте вниз.</p>
+    </div>
+    <div class="hint" aria-hidden="true"><span></span>листайте</div>
+  </section>
+
+  <section class="stop" data-stop="1" aria-labelledby="h1">
+    <div class="card">
+      <p class="kicker">Остановка 2 из 6 · Шестерни</p>
+      <h2 id="h1">Двести деталей ради одной секунды</h2>
+      <p>Каждое колёсико цепляется за соседнее. Крутите колесо мыши или двигайте пальцем: вы заводите механизм сами.</p>
+    </div>
+  </section>
+
+  <section class="stop" data-stop="2" aria-labelledby="h2">
+    <div class="card">
+      <p class="kicker">Остановка 3 из 6 · Пружина</p>
+      <h2 id="h2">Вся сила - в одной ленте</h2>
+      <p>Тонкая стальная спираль. Её закрутили один раз, и она целый день понемногу распрямляется. Видите, как она наливается теплом?</p>
+    </div>
+  </section>
+
+  <section class="stop" data-stop="3" aria-labelledby="h3">
+    <div class="card">
+      <p class="kicker">Остановка 4 из 6 · Баланс</p>
+      <h2 id="h3">Вот оно, сердце</h2>
+      <p>Колесо качается пять раз в секунду, а вилка пропускает зубец за зубцом. Это и есть «тик-так». Включите звук, и услышите.</p>
+    </div>
+  </section>
+
+  <section class="stop" data-stop="4" aria-labelledby="h4">
+    <div class="card">
+      <p class="kicker">Остановка 5 из 6 · Рубин</p>
+      <h2 id="h4">Камень, который гасит трение</h2>
+      <p>Рубины в часах не для красоты: ось вертится в них почти без износа. А ещё рядом можно поиграть.</p>
+      <button class="btn btn-play" id="play" type="button">Играть: заводи часы</button>
+    </div>
+  </section>
+
+  <section class="stop" data-stop="5" aria-labelledby="h5">
+    <div class="card card-final">
+      <p class="kicker">Остановка 6 из 6 · Весь механизм</p>
+      <h2 id="h5">Вот и всё устройство</h2>
+      <p class="signature">Этот сайт сделан с ИИ за один вечер. Как - смотрите в <a href="https://www.youtube.com/@ykrasiviy" target="_blank" rel="noopener">серии «Вайбкодинг» на YouTube</a></p>
+      <p class="small">Без рекламы и трекеров. Мы просто показываем, что сегодня можно сделать, даже если вы не программист.</p>
+      <div class="row">
+        <a class="btn" href="https://www.youtube.com/@ykrasiviy" target="_blank" rel="noopener">Открыть канал</a>
+        <button class="btn btn-ghost" id="toTop" type="button">Наверх</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<button class="sound" id="sound" type="button" aria-pressed="false">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="sound-label">Включить звук</span>
+</button>
+
+<!-- Игра -->
+<div class="game" id="game" hidden>
+  <div class="game-hud" id="hud">
+    <div class="stat"><span>Счёт</span><b id="gScore">0</b></div>
+    <div class="stat"><span>Рекорд</span><b id="gBest">0</b></div>
+    <div class="stat"><span>Жизни</span><b id="gLives" aria-label="Жизни">3</b></div>
+    <div class="stat"><span>Серия</span><b id="gCombo">x1</b></div>
+    <div class="hud-btns">
+      <button class="btn btn-small" id="gPause" type="button">Пауза</button>
+      <button class="btn btn-small btn-ghost" id="gExit" type="button">Выйти</button>
+    </div>
+  </div>
+  <div class="game-live sr" id="gLive" aria-live="polite"></div>
+  <div class="game-panel" id="gPanel" role="dialog" aria-modal="true" aria-labelledby="gTitle">
+    <h2 id="gTitle">Заводи часы</h2>
+    <p id="gText">Ловите золотые шестерёнки. Ржавчины бойтесь: три удара, и часы встанут. Рубин замедляет время.</p>
+    <p class="small">Мышь или палец: тяните лоток. Клавиатура: стрелки или A/D. Пробел или P - пауза.</p>
+    <p class="small" id="gResult"></p>
+    <div class="row">
+      <button class="btn" id="gStart" type="button">Начать</button>
+      <button class="btn btn-ghost" id="gBack" type="button">Назад к путешествию</button>
+    </div>
+  </div>
+</div>
+
+<div class="stub" id="stub" hidden role="alert">
+  <div class="card">
+    <h2>Здесь нужен WebGL</h2>
+    <p>Ваш браузер или устройство не потянули 3D. Попробуйте свежий Chrome, Safari или Firefox на другом устройстве.</p>
+    <p class="signature">Этот сайт сделан с ИИ за один вечер. Как - смотрите в <a href="https://www.youtube.com/@ykrasiviy" target="_blank" rel="noopener">серии «Вайбкодинг» на YouTube</a></p>
+  </div>
+</div>
+
+</body>
+</html>
